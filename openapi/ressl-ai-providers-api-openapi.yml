@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: Ressl Platform Providers API
+  version: v1
+  description: Control-plane API for Ressl, a platform that provisions hosted mock SaaS APIs for agents and evaluations. List the mock SaaS providers your organization is granted, then create a short-lived snapshot of one provider that returns a public HTTPS base URL your agent can call. Control traffic uses simulation.ressl.ai; provisioned mock traffic is served from *.mock.ressl.cc.
+  contact:
+    name: Ressl
+    url: https://ressl.ai
+  x-apievangelist-generated: true
+  x-apievangelist-source: https://docs.ressl.ai/llms.txt
+servers:
+- url: https://simulation.ressl.ai
+  description: Control plane (list providers, create snapshots)
+security:
+- bearerAuth: []
+- apiKeyAuth: []
+tags:
+- name: Providers
+  description: Discover mock SaaS providers granted to your organization
+paths:
+  /providers/list:
+    get:
+      operationId: listProviders
+      summary: List providers
+      description: Returns the mock SaaS provider slugs granted to the API key's organization. Use a slug from this list when creating a snapshot.
+      tags:
+      - Providers
+      responses:
+        '200':
+          description: Provider slugs available to your organization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderList'
+              example:
+                providers:
+                - jira
+                - salesforce
+                - slack
+        '401':
+          description: Invalid or missing API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Unauthorized
+components:
+  schemas:
+    ProviderList:
+      type: object
+      required:
+      - providers
+      properties:
+        providers:
+          type: array
+          description: Provider slugs available to your organization.
+          items:
+            type: string
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Organization API key (prefix rsk_) sent as a bearer token.
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Organization API key (prefix rsk_) sent in the X-API-Key header.
