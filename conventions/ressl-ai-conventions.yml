@@ -1,0 +1,44 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.ressl.ai/skill.md
+docs: https://docs.ressl.ai/quickstart
+authentication:
+  style: api-key
+  transports:
+    - 'Authorization: Bearer rsk_...'
+    - 'X-API-Key: rsk_...'
+  scope: organization
+  key_prefix: rsk_
+  ref: authentication/ressl-ai-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    No idempotency-key header or param is documented for the control plane. On
+    a 502 provisioning failure the docs advise retrying create once, but there
+    is no idempotency contract to dedupe the retry.
+pagination:
+  supported: false
+  notes: /providers/list returns a full string array with no pagination.
+versioning:
+  scheme: implicit
+  current: v1
+  notes: >-
+    Docs reference "v1" behavior (no list/delete snapshot HTTP APIs in v1). No
+    version header or URI version segment is documented on the control plane.
+error_envelope:
+  field: error
+  content_type: application/json
+  ref: errors/ressl-ai-problem-types.yml
+lifecycle_model:
+  notes: >-
+    Snapshots are ephemeral. A snapshot lives for its TTL (default 1h, forms
+    like 15m/1h/1d, max 7d) and is torn down automatically on expiry. There is
+    no list or delete snapshot endpoint in v1 - TTL is the teardown mechanism.
+hosts:
+  control_plane: https://simulation.ressl.ai
+  mock_traffic: https://{snapshotId}.{slug}.mock.ressl.cc
+  notes: >-
+    Never invent mock hosts under ressl.ai. Provisioned mocks live only on
+    *.mock.ressl.cc. Snapshot URLs are public but unguessable until expiry.
+rate_limit_signaling:
+  documented: false

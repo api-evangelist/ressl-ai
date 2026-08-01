@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/ressl-ai-platform-openapi.yml
+docs: https://docs.ressl.ai/api-reference/authentication
+notes: >-
+  Control-plane requests use an organization API key (prefix rsk_) created in
+  the simulation.ressl.ai console (Settings, API keys), sent either as
+  Authorization: Bearer rsk_... or X-API-Key: rsk_.... Keys are org-scoped and
+  shown once at creation. Missing, malformed, or revoked keys return 401
+  { "error": "Unauthorized" }. The human console itself authenticates via
+  WorkOS AuthKit; the rsk_ key is the programmatic credential.
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Organization API key (prefix rsk_) sent as a bearer token.
+  sources:
+  - openapi/ressl-ai-platform-openapi.yml
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  description: Organization API key (prefix rsk_) sent in the X-API-Key header.
+  sources:
+  - openapi/ressl-ai-platform-openapi.yml

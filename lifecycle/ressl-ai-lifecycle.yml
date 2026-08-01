@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.ressl.ai
+docs: https://docs.ressl.ai/quickstart
+versioning:
+  scheme: implicit
+  current: v1
+  notes: >-
+    Docs reference v1 behavior (no list/delete snapshot HTTP APIs in v1). No
+    version header or URI version segment is documented.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No published deprecation policy or RFC 8594 Sunset/Deprecation header support found.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+resource_lifecycle:
+  model: ttl-expiry
+  ttl_default: 1h
+  ttl_max: 7d
+  notes: >-
+    Provisioned snapshots are ephemeral and expire on their TTL. No manual
+    delete endpoint exists in v1; expiry is the teardown mechanism.
+deprecated_operations: []

@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/ressl-ai-platform-openapi.yml
+notes: >-
+  No official hosted or remote MCP server was found for Ressl (docs, npm
+  @modelcontextprotocol, MCP registries checked). Ressl does publish an Agent
+  Skill at https://docs.ressl.ai/skill.md. The tools below are a candidate list
+  derived one-to-one from the documented control-plane operations.
+server:
+  name: ressl
+  transport: http
+tools:
+  - name: list_providers
+    description: List mock SaaS provider slugs your organization can snapshot.
+    source_operation: openapi/ressl-ai-platform-openapi.yml#listProviders
+  - name: create_snapshot
+    description: Provision a hosted mock SaaS API for one provider with optional seed and TTL.
+    source_operation: openapi/ressl-ai-platform-openapi.yml#createSnapshot

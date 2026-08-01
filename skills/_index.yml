@@ -1,0 +1,15 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.ressl.ai/skill.md
+skills:
+  - file: ressl-ai-skill.md
+    name: ressl
+    description: >-
+      Create and call hosted mock SaaS APIs via the Ressl platform API. Use when
+      an agent or eval needs a live HTTPS mock of a SaaS product without a real
+      tenant.
+    api: openapi/ressl-ai-platform-openapi.yml
+    operations:
+      - listProviders
+      - createSnapshot
+    published: true

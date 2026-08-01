@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/ressl-ai-platform-openapi.yml
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: "control plane uses org API key (rsk_) via bearer / X-API-Key, not oauth2"
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 'errors use a flat error-string envelope, not application/problem+json'
+  - id: rest-json
+    conforms: true
+    evidence: JSON request/response over HTTPS with resource-style paths
+  - id: bearer-token-rfc6750
+    conforms: true
+    evidence: Authorization Bearer rsk_ accepted on every control-plane request

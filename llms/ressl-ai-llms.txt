@@ -1,0 +1,14 @@
+# Ressl
+
+> Hosted mock SaaS APIs for agents and evaluations.
+
+## Docs
+
+- [Authentication](https://docs.ressl.ai/api-reference/authentication.md): Authenticate platform API requests with an organization API key.
+- [Create snapshot](https://docs.ressl.ai/api-reference/create-snapshot.md): Provision a hosted mock SaaS API for one provider with optional seed and TTL.
+- [List providers](https://docs.ressl.ai/api-reference/list-providers.md): List mock SaaS provider slugs your organization can snapshot.
+- [Get Started](https://docs.ressl.ai/index.md): Hosted mock SaaS APIs your agents can call over HTTPS—no real customer tenants required.
+- [Gmail Business](https://docs.ressl.ai/providers/gmail-business.md): Launch a short-lived Gmail-style business inbox with synthetic built-in data.
+- [LinkedIn](https://docs.ressl.ai/providers/linkedin.md): Launch a short-lived LinkedIn browser UI with deterministic built-in data.
+- [Salesforce](https://docs.ressl.ai/providers/salesforce.md): Hosted Salesforce REST mock: seed records, describe config, URLs, and copy-paste templates.
+- [Quickstart](https://docs.ressl.ai/quickstart.md): Create an API key, list providers, spin up a mock SaaS snapshot, and call it over HTTPS.

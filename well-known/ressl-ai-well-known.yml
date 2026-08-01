@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+hosts:
+  - host: https://simulation.ressl.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 307
+        note: redirects unauthenticated requests to WorkOS AuthKit; no file served
+      - path: /.well-known/openid-configuration
+        status: 307
+        note: redirect to auth, not an OIDC discovery document
+      - path: /.well-known/oauth-authorization-server
+        status: 307
+      - path: /.well-known/api-catalog
+        status: 307
+      - path: /.well-known/ai-plugin.json
+        status: 307
+  - host: https://ressl.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 308
+      - path: /.well-known/openid-configuration
+        status: 308
+  - host: https://docs.ressl.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+notes: >-
+  No /.well-known/ discovery documents are served. The control plane redirects
+  all unauthenticated paths (including /.well-known/*) to WorkOS AuthKit sign-in.
+  Ressl does publish an llms.txt (https://docs.ressl.ai/llms.txt) and an Agent
+  Skill (https://docs.ressl.ai/skill.md) as its machine-readable surface.

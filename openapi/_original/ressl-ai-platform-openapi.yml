@@ -1,0 +1,205 @@
+openapi: 3.1.0
+info:
+  title: Ressl Platform API
+  version: v1
+  description: >-
+    Control-plane API for Ressl, a platform that provisions hosted mock SaaS
+    APIs for agents and evaluations. List the mock SaaS providers your
+    organization is granted, then create a short-lived snapshot of one provider
+    that returns a public HTTPS base URL your agent can call. Control traffic
+    uses simulation.ressl.ai; provisioned mock traffic is served from
+    *.mock.ressl.cc.
+  contact:
+    name: Ressl
+    url: https://ressl.ai
+  x-apievangelist-generated: true
+  x-apievangelist-source: https://docs.ressl.ai/llms.txt
+servers:
+  - url: https://simulation.ressl.ai
+    description: Control plane (list providers, create snapshots)
+security:
+  - bearerAuth: []
+  - apiKeyAuth: []
+tags:
+  - name: Providers
+    description: Discover mock SaaS providers granted to your organization
+  - name: Snapshots
+    description: Provision short-lived hosted mock SaaS APIs
+paths:
+  /providers/list:
+    get:
+      operationId: listProviders
+      summary: List providers
+      description: >-
+        Returns the mock SaaS provider slugs granted to the API key's
+        organization. Use a slug from this list when creating a snapshot.
+      tags:
+        - Providers
+      responses:
+        '200':
+          description: Provider slugs available to your organization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderList'
+              example:
+                providers:
+                  - jira
+                  - salesforce
+                  - slack
+        '401':
+          description: Invalid or missing API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Unauthorized
+  /providers/{slug}/create-snapshot:
+    post:
+      operationId: createSnapshot
+      summary: Create snapshot
+      description: >-
+        Provisions a hosted snapshot of one provider. API providers return a
+        mock API base URL; UI providers return a browser application URL. Both
+        remain available until the TTL expires. Provisioning may take one to two
+        minutes.
+      tags:
+        - Snapshots
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          description: Provider slug from GET /providers/list.
+          schema:
+            type: string
+          example: jira
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSnapshotRequest'
+            example:
+              ttl: 1h
+              seed:
+                jira:
+                  projects:
+                    - id: '10000'
+                      key: DEMO
+                      name: Demo
+      responses:
+        '200':
+          description: Snapshot provisioned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+              example:
+                snapshotId: snap_a1b2c3d4e5f6789012345678
+                slug: jira
+                url: https://snap_a1b2c3d4e5f6789012345678.jira.mock.ressl.cc
+                expiresAt: '2026-07-14T12:00:00.000Z'
+                ttl: 1h
+        '400':
+          description: Invalid slug, body, or ttl.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Invalid or missing API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Organization is not granted that provider.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Your organization does not have access to that provider.
+        '502':
+          description: Provisioning failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Organization API key (prefix rsk_) sent as a bearer token.
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Organization API key (prefix rsk_) sent in the X-API-Key header.
+  schemas:
+    ProviderList:
+      type: object
+      required:
+        - providers
+      properties:
+        providers:
+          type: array
+          description: Provider slugs available to your organization.
+          items:
+            type: string
+    CreateSnapshotRequest:
+      type: object
+      description: All fields optional. An empty body uses defaults (ttl 1h, empty seed).
+      properties:
+        ttl:
+          type: string
+          default: 1h
+          description: Snapshot lifetime. Forms like 15m, 1h, 1d. Maximum 7d.
+        seed:
+          type: object
+          additionalProperties: true
+          description: >-
+            Initial mock data for API providers. Recommended shape:
+            { "<slug>": { "<Resource>": [ ... ] } }. UI providers ignore this.
+        config:
+          type: object
+          additionalProperties: true
+          description: >-
+            Provider-specific emulator overrides. For salesforce, describe JSON
+            that fully replaces baked metadata. UI providers ignore this.
+    Snapshot:
+      type: object
+      required:
+        - snapshotId
+        - slug
+        - url
+        - expiresAt
+        - ttl
+      properties:
+        snapshotId:
+          type: string
+          description: Snapshot id (also the subdomain label on the mock URL).
+        slug:
+          type: string
+          description: Provider that was provisioned.
+        url:
+          type: string
+          format: uri
+          description: Public snapshot URL. Use as an API base URL or open in a browser.
+        expiresAt:
+          type: string
+          format: date-time
+          description: ISO-8601 expiry time derived from ttl.
+        ttl:
+          type: string
+          description: Normalized TTL that was applied.
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.

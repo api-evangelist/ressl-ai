@@ -1,0 +1,16 @@
+{
+  "provider": "ressl-ai",
+  "sources": [
+    "ressl-ai-providers-api-openapi.yml",
+    "ressl-ai-snapshots-api-openapi.yml"
+  ],
+  "outputs": [
+    "ressl-ai-providers-api-openapi.yml",
+    "ressl-ai-snapshots-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,22 +1,129 @@
 aid: ressl-ai
-name: Ressl Ai
-description: Ressl Ai is a company surfaced as a portfolio company of y-combinator and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ressl-ai.png
+name: Ressl
+description: >-
+  Ressl (ressl.ai) is a Y Combinator-backed platform that provisions hosted mock
+  SaaS APIs for AI agents and evaluations. Its control-plane API lets you list
+  the mock providers your organization is granted (for example jira, salesforce,
+  slack, plus UI clones of Gmail Business and LinkedIn) and create a short-lived
+  snapshot of one provider that returns a public HTTPS base URL your agent can
+  call - no real customer tenant required. Snapshots carry deterministic or
+  seeded synthetic data and expire on a TTL (default one hour, up to seven days).
+  Control traffic runs on simulation.ressl.ai; provisioned mock traffic is served
+  from *.mock.ressl.cc. Ressl helps teams train, benchmark, and deploy autonomous
+  agents by giving them realistic SaaS surfaces to act against safely.
 url: https://raw.githubusercontent.com/api-evangelist/ressl-ai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - y-combinator
-x-tier: stub
-x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v1
 tags:
-- Company
-apis: []
+- Mock APIs
+- API Testing
+- AI Agents
+- Agent Evaluation
+- Sandbox
+- Developer Tools
+- Synthetic Data
+- SaaS
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: ressl-ai:ressl-ai-providers-api
+  name: Ressl Providers API
+  description: Discover mock SaaS providers granted to your organization
+  humanURL: https://docs.ressl.ai
+  baseURL: https://simulation.ressl.ai
+  tags:
+  - Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/ressl-ai-providers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ressl.ai
+  - type: APIReference
+    url: https://docs.ressl.ai/api-reference/authentication
+  - type: Quickstart
+    url: https://docs.ressl.ai/quickstart
+- aid: ressl-ai:ressl-ai-snapshots-api
+  name: Ressl Snapshots API
+  description: Provision short-lived hosted mock SaaS APIs
+  humanURL: https://docs.ressl.ai
+  baseURL: https://simulation.ressl.ai
+  tags:
+  - Snapshots
+  properties:
+  - type: OpenAPI
+    url: openapi/ressl-ai-snapshots-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ressl.ai
+  - type: APIReference
+    url: https://docs.ressl.ai/api-reference/authentication
+  - type: Quickstart
+    url: https://docs.ressl.ai/quickstart
+common:
+- type: DomainSecurity
+  url: security/ressl-ai-domain-security.yml
+- type: Authentication
+  url: authentication/ressl-ai-authentication.yml
+- type: OpenAPI
+  url: openapi/ressl-ai-platform-openapi.yml
+- type: Overlay
+  url: overlays/ressl-ai-platform-overlay.yaml
+- type: ErrorCatalog
+  url: errors/ressl-ai-problem-types.yml
+- type: Conventions
+  url: conventions/ressl-ai-conventions.yml
+- type: Lifecycle
+  url: lifecycle/ressl-ai-lifecycle.yml
+- type: Conformance
+  url: conformance/ressl-ai-conformance.yml
+- type: DataModel
+  url: data-model/ressl-ai-data-model.yml
+- type: WellKnown
+  url: well-known/ressl-ai-well-known.yml
+- type: MCPServer
+  url: mcp/ressl-ai-mcp.yml
+- type: AgentSkill
+  url: skills/ressl-ai-skill.md
+- type: LLMsTxt
+  url: llms/ressl-ai-llms.txt
+- type: Documentation
+  url: https://docs.ressl.ai
+- type: APIReference
+  url: https://docs.ressl.ai/api-reference/authentication
+- type: GettingStarted
+  url: https://docs.ressl.ai/quickstart
+- type: DeveloperPortal
+  url: https://simulation.ressl.ai
+- type: SignUp
+  url: https://simulation.ressl.ai
+- type: GitHubOrganization
+  url: https://github.com/ressl-ai
+- type: Support
+  url: https://join.slack.com/t/resslaiaiagen-czp2639/shared_invite/zt-2vpd5vabp-D9LpsJZRiweb7_OFnvIvhA
+- type: LinkedIn
+  url: https://www.linkedin.com/company/ressl-ai/

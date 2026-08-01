@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/ressl-ai-platform-openapi.yml
+entities:
+  - name: Provider
+    description: A mock SaaS product that an organization can snapshot (e.g. jira, salesforce, slack).
+    id_field: slug
+    fields:
+      - slug
+  - name: Snapshot
+    description: A short-lived hosted instance of one provider's mock API.
+    id_field: snapshotId
+    id_prefix: snap_
+    fields:
+      - snapshotId
+      - slug
+      - url
+      - expiresAt
+      - ttl
+  - name: ApiKey
+    description: Organization-scoped credential used to authenticate control-plane calls.
+    id_prefix: rsk_
+    fields:
+      - key
+relationships:
+  - from: Snapshot
+    to: Provider
+    kind: belongs_to
+    via: slug
+  - from: Snapshot
+    to: ApiKey
+    kind: belongs_to
+    via: organization
+    notes: A snapshot is created under the organization that owns the API key.

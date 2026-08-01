@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/ressl-ai-platform-openapi.yml
+docs: https://docs.ressl.ai/api-reference/create-snapshot
+format: custom
+envelope:
+  field: error
+  content_type: application/json
+  shape: '{ "error": "<human-readable message>" }'
+  notes: >-
+    Ressl returns a flat JSON object with a single "error" string. It does not
+    use RFC 9457 application/problem+json. Some errors may include an additional
+    "detail" field on 502 provisioning failures.
+problems:
+  - status: 400
+    title: Bad request
+    meaning: Invalid slug, body, or ttl.
+    source_operation: openapi/ressl-ai-platform-openapi.yml#createSnapshot
+  - status: 401
+    title: Unauthorized
+    meaning: Missing, malformed, or revoked API key.
+    example: '{ "error": "Unauthorized" }'
+    source_operation: openapi/ressl-ai-platform-openapi.yml#listProviders
+  - status: 403
+    title: Forbidden
+    meaning: Organization is not granted that provider.
+    example: '{ "error": "Your organization does not have access to that provider." }'
+    source_operation: openapi/ressl-ai-platform-openapi.yml#createSnapshot
+  - status: 502
+    title: Bad gateway
+    meaning: Provisioning failed. Retry create once after a short wait; surface detail if present.
+    source_operation: openapi/ressl-ai-platform-openapi.yml#createSnapshot
