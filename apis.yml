@@ -90,7 +90,7 @@ common:
 - type: Authentication
   url: authentication/ressl-ai-authentication.yml
 - type: OpenAPI
-  url: openapi/ressl-ai-platform-openapi.yml
+  url: openapi/_original/ressl-ai-platform-openapi.yml
 - type: Overlay
   url: overlays/ressl-ai-platform-overlay.yaml
 - type: ErrorCatalog
