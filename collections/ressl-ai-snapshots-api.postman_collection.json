@@ -1,0 +1,404 @@
+{
+  "item": [
+    {
+      "id": "742c60a4-f959-4c41-843d-1fdc699e6c41",
+      "name": "Snapshots",
+      "description": {
+        "content": "Provision short-lived hosted mock SaaS APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "500001e6-e8fa-449f-a8b6-3c651fbfd2bc",
+          "name": "Create snapshot",
+          "request": {
+            "name": "Create snapshot",
+            "description": {
+              "content": "Provisions a hosted snapshot of one provider. API providers return a mock API base URL; UI providers return a browser application URL. Both remain available until the TTL expires. Provisioning may take one to two minutes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers",
+                ":slug",
+                "create-snapshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) Provider slug from GET /providers/list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ttl\": \"1h\",\n  \"seed\": {\n    \"key_0\": \"string\",\n    \"key_1\": 4580,\n    \"key_2\": 9987.589900623343\n  },\n  \"config\": {\n    \"key_0\": 6150.837343536153,\n    \"key_1\": 9586,\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f41f9ec5-2030-4268-8c52-5718d41def0f",
+              "name": "Snapshot provisioned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":slug",
+                    "create-snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) Provider slug from GET /providers/list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ttl\": \"1h\",\n  \"seed\": {\n    \"jira\": {\n      \"projects\": [\n        {\n          \"id\": \"10000\",\n          \"key\": \"DEMO\",\n          \"name\": \"Demo\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"snapshotId\": \"snap_a1b2c3d4e5f6789012345678\",\n  \"slug\": \"jira\",\n  \"url\": \"https://snap_a1b2c3d4e5f6789012345678.jira.mock.ressl.cc\",\n  \"expiresAt\": \"2026-07-14T12:00:00.000Z\",\n  \"ttl\": \"1h\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a48f6ec-6ad2-4b8f-b177-23899f9d39b5",
+              "name": "Invalid slug, body, or ttl.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":slug",
+                    "create-snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) Provider slug from GET /providers/list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ttl\": \"1h\",\n  \"seed\": {\n    \"jira\": {\n      \"projects\": [\n        {\n          \"id\": \"10000\",\n          \"key\": \"DEMO\",\n          \"name\": \"Demo\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1350574-c0a9-46cb-a43d-09ef1e20a2e8",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":slug",
+                    "create-snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) Provider slug from GET /providers/list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ttl\": \"1h\",\n  \"seed\": {\n    \"jira\": {\n      \"projects\": [\n        {\n          \"id\": \"10000\",\n          \"key\": \"DEMO\",\n          \"name\": \"Demo\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00ae0742-0950-4406-945a-e5d4b6eaf476",
+              "name": "Organization is not granted that provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":slug",
+                    "create-snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) Provider slug from GET /providers/list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ttl\": \"1h\",\n  \"seed\": {\n    \"jira\": {\n      \"projects\": [\n        {\n          \"id\": \"10000\",\n          \"key\": \"DEMO\",\n          \"name\": \"Demo\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Your organization does not have access to that provider.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b052c61d-f1f7-4fb7-a478-8d070334c157",
+              "name": "Provisioning failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":slug",
+                    "create-snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) Provider slug from GET /providers/list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ttl\": \"1h\",\n  \"seed\": {\n    \"jira\": {\n      \"projects\": [\n        {\n          \"id\": \"10000\",\n          \"key\": \"DEMO\",\n          \"name\": \"Demo\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://simulation.ressl.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "84f28075-f0f0-4718-b30b-94ab1acfb543",
+    "name": "Ressl Platform Providers Snapshots API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control-plane API for Ressl, a platform that provisions hosted mock SaaS APIs for agents and evaluations. List the mock SaaS providers your organization is granted, then create a short-lived snapshot of one provider that returns a public HTTPS base URL your agent can call. Control traffic uses simulation.ressl.ai; provisioned mock traffic is served from *.mock.ressl.cc.\n\nContact Support:\n Name: Ressl",
+      "type": "text/plain"
+    }
+  }
+}

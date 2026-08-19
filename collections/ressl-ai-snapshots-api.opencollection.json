@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ressl Platform Providers Snapshots API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Snapshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://simulation.ressl.ai/providers/:slug/create-snapshot",
+            "params": [
+              {
+                "name": "slug",
+                "value": "jira",
+                "type": "path",
+                "description": "Provider slug from GET /providers/list."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provisions a hosted snapshot of one provider. API providers return a mock API base URL; UI providers return a browser application URL. Both remain available until the TTL expires. Provisioning may take one to two minutes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

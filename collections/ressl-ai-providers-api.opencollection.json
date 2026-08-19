@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ressl Platform Providers API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://simulation.ressl.ai/providers/list"
+          },
+          "docs": "Returns the mock SaaS provider slugs granted to the API key's organization. Use a slug from this list when creating a snapshot."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

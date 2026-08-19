@@ -1,0 +1,165 @@
+{
+  "item": [
+    {
+      "id": "ee746573-b3d8-4123-abba-6cba70fe6bb7",
+      "name": "Providers",
+      "description": {
+        "content": "Discover mock SaaS providers granted to your organization",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b66f9a4c-4c5e-4416-93b1-8500db12e1f0",
+          "name": "List providers",
+          "request": {
+            "name": "List providers",
+            "description": {
+              "content": "Returns the mock SaaS provider slugs granted to the API key's organization. Use a slug from this list when creating a snapshot.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8017c72d-9f1f-4214-928f-e2df2b2ab73a",
+              "name": "Provider slugs available to your organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"providers\": [\n    \"jira\",\n    \"salesforce\",\n    \"slack\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f195a44-052d-4dad-bb38-694b681c9091",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://simulation.ressl.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "321f32eb-f2c8-4306-b74e-37d3566dc88f",
+    "name": "Ressl Platform Providers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control-plane API for Ressl, a platform that provisions hosted mock SaaS APIs for agents and evaluations. List the mock SaaS providers your organization is granted, then create a short-lived snapshot of one provider that returns a public HTTPS base URL your agent can call. Control traffic uses simulation.ressl.ai; provisioned mock traffic is served from *.mock.ressl.cc.\n\nContact Support:\n Name: Ressl",
+      "type": "text/plain"
+    }
+  }
+}
