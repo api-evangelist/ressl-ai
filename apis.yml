@@ -107,6 +107,8 @@ apis:
   - type: Quickstart
     url: https://docs.ressl.ai/quickstart
 common:
+- type: Website
+  url: https://www.ressl.ai/
 - type: DomainSecurity
   url: security/ressl-ai-domain-security.yml
 - type: Authentication
