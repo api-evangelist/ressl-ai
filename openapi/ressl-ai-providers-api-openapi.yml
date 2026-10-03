@@ -47,14 +47,6 @@ paths:
                 error: Unauthorized
 components:
   schemas:
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
     ProviderList:
       type: object
       required:
@@ -65,6 +57,14 @@ components:
           description: Provider slugs available to your organization.
           items:
             type: string
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
   securitySchemes:
     bearerAuth:
       type: http
