@@ -88,14 +88,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
     Snapshot:
       type: object
       required:
@@ -138,6 +130,14 @@ components:
           type: object
           additionalProperties: true
           description: Provider-specific emulator overrides. For salesforce, describe JSON that fully replaces baked metadata. UI providers ignore this.
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
   securitySchemes:
     bearerAuth:
       type: http
